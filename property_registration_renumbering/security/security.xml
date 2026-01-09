@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+		<record id="renumbering_delete_draft_only" model="ir.rule">
+			<field name="name">Renumbering: Delete Draft Only</field>
+			<field name="model_id" ref="model_property_registration_renumbering"/>
+			<field name="global" eval="True"/>
+			<field name="groups" eval="[(4, ref('base.group_user'))]"/>
+			<field name="domain_force">[('state', '=', 'draft')]</field>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="True"/>
+		</record>
+	</data>
+</odoo>
