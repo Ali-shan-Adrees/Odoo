@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="seq_property_registration_renumbering" model="ir.sequence">
+		<field name="name">Property Renumbering Sequence</field>
+		<field name="code">property.registration.renumbering</field>
+		<field name="prefix">PRR-</field>
+		<field name="padding">3</field>
+	</record>
+	<record id="view_property_registration_renumbering_tree" model="ir.ui.view">
+		<field name="name">property.registration.renumbering.tree</field>
+		<field name="model">property.registration.renumbering</field>
+		<field name="arch" type="xml">
+			<list string="Renumbering Requests">
+				<field name="name" />
+				<field name="alif_link_sale" />
+				<field name="old_file_id" />
+				<field name="new_file_name" />
+				<field name="state" />
+				<field name="first_approval_name" />
+				<field name="second_approval_name" />
+			</list>
+		</field>
+	</record>
+	<record id="view_property_registration_renumbering_form" model="ir.ui.view">
+		<field name="name">property.registration.renumbering.form</field>
+		<field name="model">property.registration.renumbering</field>
+		<field name="arch" type="xml">
+			<form string="Renumbering Request">
+				<header>
+					<button name="action_send_for_approval" string="Send For Approval" type="object"  class="oe_highlight" />
+					<button name="action_first_approval" string="First Approval" type="object"  class="oe_highlight" />
+					<button name="action_second_approval" string="Second Approval" type="object"  class="oe_highlight" />
+					<button name="action_set_to_draft" string="Set to Draft" type="object"  />
+					<button name="action_rejection" string="Reject" type="object" />
+					<field name="state" widget="statusbar" statusbar_visible="draft,approved" />
+				</header>
+				<sheet>
+					<div class="oe_title">
+						<h1>
+							<field name="name" readonly="1" />
+						</h1>
+					</div>
+					<group>
+						<group>
+							<field name="old_file_id"  readonly="state !='draft'"/>
+							<field name="old_file_name" readonly="1" />
+						</group>
+						<group>
+							<field name="new_file_name" readonly="state !='draft'"/>
+						</group>
+						<notebook>
+							<page string="Approval Details">
+								<group>
+									<group string="First Approval">
+										<field name="first_approval_name" readonly="1" />
+									</group>
+									<group string="Second Approval">
+										<field name="second_approval_name" readonly="1" />
+									</group>
+								</group>
+							</page>
+						</notebook>
+					</group>
+				</sheet>
+				<chatter/>
+			</form>
+		</field>
+	</record>
+	<record id="action_property_registration_renumbering" model="ir.actions.act_window">
+		<field name="name">File Renumbering Requests</field>
+		<field name="res_model">property.registration.renumbering</field>
+		<field name="view_mode">list,form</field>
+	</record>
+	<menuitem id="menu_property_registration_root" name="Property Registration" sequence="100"
+	 web_icon="property_registration_renumbering,static/description/icon.png" />
+	<menuitem id="menu_renumbering_requests" name="File Renumbering" parent="menu_property_registration_root" action="action_property_registration_renumbering" sequence="10" />
+</odoo>

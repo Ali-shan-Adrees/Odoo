@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="unadjusted_advance_template">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <style>
+                        body.o_in_iframe {
+                            margin: 0px !important;
+                            padding: 0px !important;
+                        }
+
+                        .dt-buttons {
+                            margin: 5px 0px;
+                        }
+
+                        @media (min-width: 1200px) {
+                            .container {
+                                width: 100%;
+                                padding: 10px 0px 0px 10px !important;
+                            }
+                        }
+
+                        @media (min-width: 992px) {
+                            .container {
+                                width: 100%;
+                                padding: 10px 0px 0px 10px !important;
+                            }
+                        }
+
+                        @media (min-width: 768px) {
+                            .container {
+                                width: 100%;
+                                padding: 10px 0px 0px 10px !important;
+                            }
+                        }
+
+                        .container {
+                            width: 100%;
+                            padding: 10px 0px 0px 10px !important;
+                        }
+
+                        .header,
+                        .footer {
+
+                            display: none;
+                        }
+
+                        @media print {
+                            thead {
+                                display: table-header-group;
+                            }
+                        }
+
+                        .clearfloat {
+                            clear: both;
+                            float: none;
+                            width: 100%;
+                            height: 1px;
+                            display: block;
+                        }
+
+                        .report-container {
+                            width: 1000px;
+                            margin: 0px auto;
+                        }
+
+                        table {
+                            border: 1px solid #000;
+                            margin: 30px 0px;
+                            width: 100%;
+                            border-spacing: 0px;
+                        }
+
+                        table tr th,
+                        table tr td {
+                            border-right: 1px solid #000;
+                            text-align: left;
+                        }
+
+                        table tr th {
+                            border-bottom: 1px solid;
+                            padding: 5px 0px;
+                            text-align: center;
+                        }
+
+                        table tr td {
+                            border: 1px solid black;
+                            padding: 3px 5px;
+                            line-height: 1.42857143;
+                            vertical-align: top;
+                        }
+
+                        .header {
+                            display: none !important;
+                        }
+
+                        .footer {
+                            display: none !important;
+                        }
+
+                        .center_div {
+                            width: 100%;
+                        }
+
+                        .solida {
+                            display: inline-block;
+                            border-bottom: 1px solid black;
+                        }
+
+                        .clear-float {
+                            float: none;
+                            display: block;
+                            clear: both;
+                        }
+
+                        .solid {
+                            font-weight: bold;
+                        }
+
+                        .textalign {
+                            text-align: center;
+                            line-height: 0.4;
+                        }
+
+                        .date {
+                            border-bottom: 1px solid black;
+                            width: 115px;
+                        }
+
+                        .underline {
+                            border-bottom: 1px solid #000;
+                            padding: 0px 0px 4px 0px;
+                        }
+
+                        h2 {
+                            margin: 20px 0px 25px 0px;
+                            font-size: 22px;
+                        }
+
+                        .first_table tr th {
+                            padding: 0px 5px;
+                            text-align: left;
+                        }
+
+                        .center {
+                            text-align: center;
+                        }
+
+                        .second_table {
+                            margin: 50px auto 0px;
+                            width: 80%;
+                        }
+                        </style>
+                        <div class="report-container">
+                            <div class="center_div">
+                                <div class="textalign">
+                                    <h1><span class="underline">Alif Holdings</span></h1>
+                                    <h2><span class="underline"><span t-esc="project.name"></span> - Project Costing</span></h2>
+                                </div>
+                            </div>
+                            <br class="clear-float" />
+                            <div>
+                                <table class="first_table">
+                                    <tbody>
+                                        <tr>
+                                            <th colspan="6" style="text-align:center;background: lightgray;">Unadjusted Advance</th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="1" style="text-align:left;background: lightgray;">Payment Number</th>
+                                            <th colspan="1" style="text-align:left;background: lightgray;">Supplier</th>
+                                            <th colspan="1" style="text-align:left;background: lightgray;">Payment Reference</th>
+                                            <th colspan="2" style="text-align:left;background: lightgray;">Amount</th>
+                                        </tr>
+                                        <t t-set="spd_total" t-value="0"></t>
+                                        <t t-foreach="supplier_payments_dct" t-as="spd">
+                                            <t t-if="'amount' in spd">
+                                                <t t-set="spd_total" t-value="spd_total + spd['amount']"></t>
+                                                <tr>
+                                                    <th colspan="1" style="text-align:left;background: white;">
+                                                        <span t-esc="spd['payment_number']"></span>
+                                                    </th>
+                                                    <th colspan="1" style="text-align:left;background: white;">
+                                                        <span t-esc="spd['partner_id']"></span>
+                                                    </th>
+                                                    <th colspan="1" style="text-align:left;background: white;">
+                                                        <span t-esc="spd['reference']"></span>
+                                                    </th>
+                                                    <th colspan="2" style="text-align:left;background: white;">
+                                                        <span t-esc="spd['amount']" t-options='{"widget": "float","precision": 0}'></span>
+                                                    </th>
+                                                </tr>
+                                            </t>
+                                        </t>
+                                        <tr>
+                                            <th colspan="3" style="text-align:left;background: lightgray;">Total</th>
+                                            <th colspan="2" style="text-align:left;background: lightgray;">
+                                                <span t-esc="spd_total" t-options='{"widget": "float","precision": 0}'></span>
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

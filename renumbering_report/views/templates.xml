@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="renumbering_report" model="ir.actions.report">
+        <field name="name">Property Renumbering Report</field>
+        <field name="model">property.registration.renumbering</field>
+        <field name="report_name">renumbering_report.renumbering_report_report</field>
+        <field name="report_file">renumbering_report.renumbering_report_report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="binding_model_id" ref="property_registration_renumbering.model_property_registration_renumbering"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

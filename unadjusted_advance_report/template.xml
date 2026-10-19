@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="report_unadjusted_advance" model="ir.actions.report">
+            <field name="name">Unadjusted Advance</field>
+            <field name="model">unadjusted.advance.wizard</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">unadjusted_advance_report.unadjusted_advance_template</field>
+            <field name="report_file">unadjusted_advance_report.unadjusted_advance_template</field>
+            <field name="binding_model_id" ref="unadjusted_advance_report.model_unadjusted_advance_wizard"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="UnadjustedAdvanceWizardView" model="ir.ui.view">
+            <field name="name">unadjusted.advance.wizard.view</field>
+            <field name="model">unadjusted.advance.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Unadjusted Advance Report">
+                    <group>
+                        <group>
+                            <field name="project" options="{'no_create':True,'no_edit':True,'no_open': True}" required="1" />
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="print_report" type="object" string="Print" class="btn-primary" />
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="UnadjustedAdvanceReportAction" model="ir.actions.act_window">
+            <field name="name">Unadjusted Advance Report</field>
+            <field name="res_model">unadjusted.advance.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="UnadjustedAdvanceWizardView" />
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="UnadjustedAdvanceMenuItem" name="Unadjusted Advance Report" action="UnadjustedAdvanceReportAction" parent="account.menu_finance_reports" />
+    </data>
+</odoo>
